@@ -1,0 +1,9 @@
+﻿.coin-jar-container {
+    background-color: beige;
+    border-radius: 50px;
+    padding-top: 15px;
+}
+
+.coin-type:hover {
+    cursor: pointer;
+}

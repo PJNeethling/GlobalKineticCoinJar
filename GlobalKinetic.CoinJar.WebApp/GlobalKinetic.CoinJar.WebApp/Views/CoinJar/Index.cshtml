@@ -1,0 +1,36 @@
+﻿@model CoinJarViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<link href="~/coinJar/coinJar_Index.css" rel="stylesheet" />
+<script src="~/coinJar/coinJar_Index.js"></script>
+
+<div class="coin-jar-container">
+    <div class="justify-content-center d-flex">
+        @foreach (var coin in Model.CoinTypes)
+        {
+            <div class="float-left">
+                @{
+                    var coinTypes = Model.CoinTypes;
+                    var imagePath = "/img/" + coin + ".png";
+                }
+
+                <img name="add-coin" class="coin-type" data-id="@((int)coin)" border="0" src="@imagePath" alt="@coin" width="120" height="120" />
+
+                <div class="text-center">@coin</div>
+            </div>
+        }
+    </div>
+    <div class="text-center">
+        <hr>
+        <label>Total Volume units in the Jar: <span>@Model.TotalVolume.Unit</span></label>
+        <br />
+        <br />
+        <label>Total ounches in the Jar: <span name="coin-jar-volume">@(Model.ActualVolume != null ? Model.ActualVolume.Unit : 0)</span></label>
+        <br />
+        <label>Total Dollar in the Jar: $<span name="coin-jar-amount">@(Model.ActualAmount != null ? Model.ActualAmount.UnitPrice : 0)</span></label>
+        <br />
+        <br />
+        <button name="reset" type="button" class="btn btn-secondary btn-lg btn-block fa fa-refresh fa-lg">  Clear coin jar</button>
+    </div>
+</div>
