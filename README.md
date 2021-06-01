@@ -2,7 +2,7 @@
 * [General info] (#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [Api calls] (#Api calls)
+* [Api calls] (#api-calls)
 
 ## General info
 This is technical assessment for Global Kinetic.
