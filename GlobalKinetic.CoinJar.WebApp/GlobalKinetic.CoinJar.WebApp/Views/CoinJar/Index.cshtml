@@ -1,4 +1,6 @@
 ﻿@model CoinJarViewModel
+@using EnumsNET;
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -13,11 +15,12 @@
                 @{
                     var coinTypes = Model.CoinTypes;
                     var imagePath = "/img/" + coin + ".png";
+
+                    var coinName = (coin).AsString(EnumFormat.Description);
                 }
 
                 <img name="add-coin" class="coin-type" data-id="@((int)coin)" border="0" src="@imagePath" alt="@coin" width="120" height="120" />
-
-                <div class="text-center">@coin</div>
+                <div class="text-center">@coinName</div>
             </div>
         }
     </div>

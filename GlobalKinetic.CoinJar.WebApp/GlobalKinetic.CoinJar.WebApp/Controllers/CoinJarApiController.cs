@@ -1,42 +1,74 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using EnumsNET;
+using GlobalKinetic.CoinJar.API.Exceptions;
+using GlobalKinetic.CoinJar.Framework;
+using GlobalKinetic.CoinJar.Framework.Exceptions;
+using GlobalKinetic.CoinJar.Framework.Interfaces;
+using GlobalKinetic.CoinJar.Framework.Models;
+using Microsoft.AspNetCore.Mvc;
+using static GlobalKinetic.CoinJar.Framework.Models.CoinJarModel;
 
 namespace GlobalKinetic.CoinJar.WebApp.Controllers
 {
-    //[Produces("application/json")]
-    //[Route("api/CoinJar")]
-    //public class CoinJarApiController : Controller
-    //{
-    //    var _coinJar = new CoinJar();
+    [Produces("application/json")]
+    [Route("api/CoinJar")]
+    public class CoinJarApiController : Controller
+    {
+        #region Private Fields
+        CoinJarModel _coinJar = Context.CoinJarInstance;
+        #endregion
 
-    //    [Route("~/api/AddCoin")]
-    //    [HttpGet]
-    //    public IEnumerable<SmartIT.Employee.MockDB.Todo> GetAllTodos()
-    //    {
-    //        return _todoRepository.GetAll();
-    //    }
+        #region Public Methods
+        #region Coin Jar
+        [Route("~/api/GetCoinJar")]
+        [HttpGet]
+        public ICoinJar GetCoinJar()
+        {
+            using (var bc = new BusinessController())
+                return bc.GetCoinJar();
+        }
 
-    //    [Route("~/api/AddTodo")]
-    //    [HttpPost]
-    //    public SmartIT.Employee.MockDB.Todo AddTodo([FromBody]SmartIT.Employee.MockDB.Todo item)
-    //    {
-    //        return _todoRepository.Add(item);
-    //    }
+        [Route("~/api/ResetCoinJar")]
+        [HttpPost]
+        public string ResetCoinJar()
+        {
+            using (var bc = new BusinessController())
+                bc.Reset();
 
-    //    [Route("~/api/UpdateTodo")]
-    //    [HttpPut]
-    //    public SmartIT.Employee.MockDB.Todo UpdateTodo([FromBody]SmartIT.Employee.MockDB.Todo item)
-    //    {
-    //        return _todoRepository.Update(item);
-    //    }
+            return "Coin jar have ben cleared out.";
+        }
 
-    //    [Route("~/api/DeleteTodo/{id}")]
-    //    [HttpDelete]
-    //    public void Delete(int id)
-    //    {
-    //        var findTodo = _todoRepository.FindById(id);
-    //        if (findTodo != null)
-    //            _todoRepository.Delete(findTodo);
-    //    }
-    //}
+        [Route("~/api/AddCoinJar")]
+        [HttpPost]
+        public IActionResult ResetCoinJar(int coinTypeID)
+        {
+            try
+            {
+                using (var bc = new BusinessController())
+                    bc.AddCoin(coinTypeID);
+
+                var coinName = ((CoinTypes)coinTypeID).AsString(EnumFormat.Description);
+
+                return Ok(new
+                {
+                    message = $"A {coinName} has been added to Jar."
+                });
+            }
+            catch (CoinOverFlowException coinOverFlowException)
+            {
+                return BadRequest(new
+                {
+                    errorMessage = $"Seomething went wrong: {coinOverFlowException.Message}"
+                });
+            }
+            catch (InValidCoinException invaidCoinException)
+            {
+                return BadRequest(new
+                {
+                    errorMessage = $"Seomething went wrong: {invaidCoinException.Message}"
+                });
+            }  
+            #endregion
+            #endregion
+        }
+}
 }

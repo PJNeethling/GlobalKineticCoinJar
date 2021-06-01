@@ -32,7 +32,19 @@ Layout.InfoMessage = {
         if (result == null || !result.message)
             return;
 
-        //Make use of a jquery plugin (EasyAlert) to display a message.
+        $.easyAlert({
+            message: result.message,
+            alertType: result.success == null ? 'info' : result.success == true ? 'success' : 'danger',
+            position: "b r",
+            globalMinWidth: '250px',
+            clickToHide: true,
+            autoHide: true,
+            time: 5000,
+            showDuration: 300,
+            hideAnimation: 'fade',
+            hideDuration: 300,
+            globalSpace: 5
+        });
     }
 };
 
@@ -40,7 +52,19 @@ Layout.Notification = {
     Show: function (message) {
 
         if (message) {
-            //Make use of a jquery plugin (EasyAlert) to display a notification.
+            $.easyAlert({
+                message: result.message,
+                alertType: result.success == null ? 'info' : result.success == true ? 'success' : 'danger',
+                position: "b r",
+                globalMinWidth: '250px',
+                clickToHide: true,
+                autoHide: true,
+                time: 5000,
+                showDuration: 300,
+                hideAnimation: 'fade',
+                hideDuration: 300,
+                globalSpace: 5
+            });
         }
     }
 }
@@ -49,8 +73,18 @@ Layout.ErrorDialog = {
     Show: function (title, error) {
         var jsonResponse = JSON.parse(error.responseText);
         var message = jsonResponse.message;
+        debugger;
 
-        //Make use of a jquery plugin (Bootbox or EasyAlert) to display a error message.
+        bootbox.dialog({
+            title: title,
+            message: message,
+            buttons: {
+                danger: {
+                    label: "OK",
+                    className: "btn-danger"
+                }
+            }
+        });
     }
 };
 
@@ -82,7 +116,7 @@ Layout.MVC = {
             }
         });
     },
-    
+
     // post action
     post: function (controllerName, actionName, model, callbacks) {
         var url;
@@ -96,6 +130,7 @@ Layout.MVC = {
             traditional: true,
             data: model,
             success: function (result) {
+                debugger;
                 Layout.InfoMessage.Show(result.success == null ? 'Info' : result.success == true ? 'Success' : 'Error', result);
                 if (callbacks != null && typeof callbacks.success === 'function') {
                     callbacks.success(result);

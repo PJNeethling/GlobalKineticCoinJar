@@ -2,6 +2,7 @@
 using GlobalKinetic.CoinJar.Framework.Exceptions;
 using GlobalKinetic.CoinJar.Framework.Implementations;
 using GlobalKinetic.CoinJar.Framework.Interfaces;
+using System.ComponentModel;
 
 namespace GlobalKinetic.CoinJar.Framework.Models
 {
@@ -16,7 +17,7 @@ namespace GlobalKinetic.CoinJar.Framework.Models
         #region Constructor
         public CoinJarModel()
         {
-            totalVolume = new FluidOunces(42);
+            totalVolume = new FluidOunces(42); //Requirement of 42 for the assesment.
             actualAmount = new USCurrency();
             actualVolume = new FluidOunces();
         }
@@ -79,11 +80,17 @@ namespace GlobalKinetic.CoinJar.Framework.Models
         #region Public Enums
         public enum CoinTypes
         {
+            [Description("Penny")]
             Penny = 1,
+            [Description("Nickel")]
             Nickel = 2,
+            [Description("Dime")]
             Dime = 3,
+            [Description("Quarter")]
             Quarter = 4,
+            [Description("Half Dollar")]
             HalfDollar = 5,
+            [Description("Dollar")]
             Dollar = 6
         } 
         #endregion

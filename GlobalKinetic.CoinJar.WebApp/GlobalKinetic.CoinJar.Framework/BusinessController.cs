@@ -20,12 +20,12 @@ namespace GlobalKinetic.CoinJar.Framework
         #endregion
 
         #region Public Methods
-        public void AddCoin(int coinID)
+        public void AddCoin(int coinTypeID)
         {
             ICoin coin = null;
 
             //Determine which coin type has been selected 
-            switch (coinID)
+            switch (coinTypeID)
             {
                 case (int)CoinTypes.Penny:
                     {
