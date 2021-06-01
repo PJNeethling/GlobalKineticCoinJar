@@ -65,9 +65,9 @@ namespace GlobalKinetic.CoinJar.Framework
         }
 
         public ICoinJar GetCoinJar() => _coinJar;
-        public decimal GetTotalAmount() => _coinJar.TotalVolume.Unit;
-        public decimal GetActualAmount() => _coinJar.ActualAmount.UnitPrice;
-        public decimal GetActualVolume() => _coinJar.ActualVolume.Unit; 
+        public decimal GetJarMaxVolume() => Context.CoinJarInstance.JarMaxVolume; //If I were to implement the other methods on the interface, I would have used them here. (GetJarMaxVolume())
+        public decimal GetTotalAmount() => _coinJar.GetTotalAmount();
+        public decimal GetTotalVolume() => Context.CoinJarInstance.TotalVolume; //If I were to implement the other methods on the interface, I would have used them here. (GetTotalVolume())
         public void Reset() => _coinJar.Reset();
         #endregion
 

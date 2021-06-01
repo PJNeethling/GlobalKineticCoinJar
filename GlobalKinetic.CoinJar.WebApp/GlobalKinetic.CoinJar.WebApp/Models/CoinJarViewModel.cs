@@ -9,7 +9,7 @@ namespace GlobalKinetic.CoinJar.WebApp.Models
     public class CoinJarViewModel
     {
         #region Constructor
-        public CoinJarViewModel(IVolume totalVolume = null)
+        public CoinJarViewModel(decimal totalVolume = 0)
         {
             TotalVolume = totalVolume;
             CoinTypes = Enum.GetValues(typeof(CoinTypes))
@@ -20,11 +20,11 @@ namespace GlobalKinetic.CoinJar.WebApp.Models
         #endregion
 
         #region Public Properties
-        public IVolume TotalVolume { get; set; }
+        public decimal TotalVolume { get; set; }
 
-        public ICurrency ActualAmount { get; set; }
+        public decimal ActualAmount { get; set; }
 
-        public IVolume ActualVolume { get; set; }
+        public decimal ActualVolume { get; set; }
         public List<CoinTypes> CoinTypes { get; } 
         #endregion
     }

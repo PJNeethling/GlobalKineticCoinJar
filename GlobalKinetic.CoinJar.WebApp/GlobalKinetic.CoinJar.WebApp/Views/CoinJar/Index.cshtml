@@ -26,12 +26,12 @@
     </div>
     <div class="text-center">
         <hr>
-        <label>Total Volume units in the Jar: <span>@Model.TotalVolume.Unit</span></label>
+        <label class="font-weight-bold">Total volume units the Jar can take: <span>@Model.TotalVolume</span></label>
         <br />
         <br />
-        <label>Total ounches in the Jar: <span name="coin-jar-volume">@(Model.ActualVolume != null ? Model.ActualVolume.Unit : 0)</span></label>
+        <label>Total volume units in the Jar: <span name="coin-jar-volume">@(Model.ActualVolume)</span></label>
         <br />
-        <label>Total Dollar in the Jar: $<span name="coin-jar-amount">@(Model.ActualAmount != null ? Model.ActualAmount.UnitPrice : 0)</span></label>
+        <label>Total Dollar in the Jar: $<span name="coin-jar-amount">@(Model.ActualAmount)</span></label>
         <br />
         <br />
         <button name="reset" type="button" class="btn btn-secondary btn-lg btn-block fa fa-refresh fa-lg">  Clear coin jar</button>

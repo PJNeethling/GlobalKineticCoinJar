@@ -21,7 +21,9 @@ namespace GlobalKinetic.CoinJar.WebApp.Controllers
                 //This can be taken out, but then the coin jar will only be cleared using the reset method or restarting the app.
                 bc.Reset();
 
-                return View(new CoinJarViewModel(bc.GetCoinJar().TotalVolume));
+                //If I were to implement the other methods on the interface, I would have used them here. (GetJarMaxVolume())
+                //Instead of below Context.CoinJarInstance.JarMaxVolume, i would use bc.GetJarMaxVolume()
+                return View(new CoinJarViewModel(Context.CoinJarInstance.JarMaxVolume));
             }
         }
         #endregion
@@ -42,8 +44,8 @@ namespace GlobalKinetic.CoinJar.WebApp.Controllers
                     {
                         success = true,
                         message = $"{coinName} added successfully.",
-                        actualVolume = bc.GetActualVolume(),
-                        actualAmmount = bc.GetActualAmount()
+                        actualVolume = bc.GetTotalVolume(),
+                        actualAmmount = bc.GetTotalAmount()
                     });
                 }
                 catch (Exception ex)
@@ -52,8 +54,8 @@ namespace GlobalKinetic.CoinJar.WebApp.Controllers
                     {
                         success = false,
                         message = $"Coin add failed: {ex.Message} ",
-                        actualVolume = bc.GetActualVolume(),
-                        actualAmmount = bc.GetActualAmount()
+                        actualVolume = bc.GetTotalVolume(),
+                        actualAmmount = bc.GetTotalAmount()
                     });
                 }
             }
@@ -68,8 +70,8 @@ namespace GlobalKinetic.CoinJar.WebApp.Controllers
                 {
                     success = true,
                     message = "Coin jar has been cleared.",
-                    actualVolume = bc.GetActualVolume(),
-                    actualAmmount = bc.GetActualAmount()
+                    actualVolume = bc.GetTotalVolume(),
+                    actualAmmount = bc.GetTotalAmount()
                 });
             }
         }
