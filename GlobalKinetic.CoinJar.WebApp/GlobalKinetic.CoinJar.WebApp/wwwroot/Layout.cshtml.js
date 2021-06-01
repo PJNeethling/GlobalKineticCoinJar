@@ -18,7 +18,6 @@ var Layout = {
     },
 
     build: function () {
-        //this.initMessenger();
         return this;
     },
 
