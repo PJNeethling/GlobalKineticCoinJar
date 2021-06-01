@@ -1,9 +1,3 @@
-## Table of contents
-* [General info] (#general-info)
-* [Technologies](#technologies)
-* [Setup](#setup)
-* [Api calls] (#api-calls)
-
 ## General info
 This is technical assessment for Global Kinetic.
 The assessment was to create a coin jar where you can add US coin types.
