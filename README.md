@@ -11,7 +11,7 @@ Project tech stack:
 * JQuery
 * Swagger
 
-##Api calls
+## Api Calls
 The below calls can be fired when the application is running.
 Your localhost port may be different.
 For the 3rd call, use coin type 1 – 6.
